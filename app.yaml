@@ -1,0 +1,21 @@
+kind: Application
+apiVersion: argoproj.io/v1alpha1
+metadata:
+  name: secrets-csi
+  namespace: argocd
+spec:
+  destination:
+    server: https://kubernetes.default.svc
+  project: default
+  source:
+    path: "."
+    plugin:
+      env:
+        - name: TK_ENV
+          value: default
+    repoURL: https://github.com/spykermj/secrets-csi
+    targetRevision: HEAD
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true

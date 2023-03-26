@@ -1,0 +1,50 @@
+configs:
+  cmp:
+    create: true
+    plugins:
+      tanka:
+        version: v1.0
+        init:
+          command:
+            - "sh"
+            - "-c"
+            - "jb install"
+        generate:
+          command:
+            - "sh"
+            - "-c"
+            - "tk show environments/${ARGOCD_ENV_TK_ENV} --dangerous-allow-redirect"
+        discover:
+          fileName: "*"
+repoServer:
+  extraContainers:
+  - name: tanka
+    command: [/var/run/argocd/argocd-cmp-server]
+    image: grafana/tanka:0.24.0
+    imagePullPolicy: IfNotPresent
+    resources:
+      limits:
+        cpu: 500m
+        memory: 512Mi
+      requests:
+        cpu: 500m
+        memory: 512Mi
+    securityContext:
+      runAsNonRoot: true
+      runAsUser: 999
+    volumeMounts:
+    - mountPath: /var/run/argocd
+      name: var-files
+    - mountPath: /home/argocd/cmp-server/plugins
+      name: plugins
+    - mountPath: /home/argocd/cmp-server/config/plugin.yaml
+      subPath: tanka.yaml
+      name: tanka-plugin
+    - mountPath: /tmp
+      name: cmp-tmp
+  volumes:
+    - name: cmp-tmp
+      emptyDir: {}
+    - name: tanka-plugin
+      configMap:
+        name: argocd-cmp-cm
