@@ -14,8 +14,6 @@ configs:
             - "sh"
             - "-c"
             - "tk show environments/${ARGOCD_ENV_TK_ENV} --dangerous-allow-redirect"
-        discover:
-          fileName: "*"
 repoServer:
   extraContainers:
   - name: tanka
