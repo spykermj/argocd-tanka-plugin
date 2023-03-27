@@ -15,7 +15,7 @@ configs:
             - "-c"
             - "tk show environments/${ARGOCD_ENV_TK_ENV} --dangerous-allow-redirect"
         discover:
-          fileName: "*"
+          fileName: "jsonnetfile.json"
 repoServer:
   extraContainers:
   - name: tanka
