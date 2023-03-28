@@ -10,6 +10,7 @@ spec:
   source:
     path: "tanka"
     plugin:
+      name: tanka
       env:
         - name: TK_ENV
           value: default
