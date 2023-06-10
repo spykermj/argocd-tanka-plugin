@@ -3,7 +3,6 @@ configs:
     create: true
     plugins:
       tanka:
-        version: v1.0
         init:
           command:
             - "sh"
