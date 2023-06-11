@@ -1,0 +1,26 @@
+kind: Application
+apiVersion: argoproj.io/v1alpha1
+metadata:
+  name: argo-parent
+  namespace: argocd
+  labels:
+    {{- include "argo-parent.labels" . | nindent 4 }}
+spec:
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: argocd
+  project: default
+  sources:
+    - path: helm/argo-parent
+      repoURL: https://github.com/spykermj/argocd-tanka-plugin
+      targetRevision: HEAD
+      helm:
+        valueFiles:
+          - $values/environments/child_deploy.yaml
+    - repoURL: https://github.com/spykermj/argo-multi-source-child
+      targetRevision: HEAD
+      ref: values
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
