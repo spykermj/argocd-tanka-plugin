@@ -3,7 +3,7 @@ kind: Application
 apiVersion: argoproj.io/v1alpha1
 metadata:
   name: argo-child
-  namespace: child
+  namespace: argocd
   labels:
     {{- include "argo-parent.labels" . | nindent 4 }}
 spec:
