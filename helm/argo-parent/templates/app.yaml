@@ -19,7 +19,7 @@ spec:
         valueFiles:
           - $values/environments/child_deploy.yaml
     - repoURL: https://github.com/spykermj/argo-multi-source-child
-      targetRevision: HEAD
+      targetRevision: {{ .Values.deploy.gitRef }}
       ref: values
     - path: helm/argo-child
       repoURL: https://github.com/spykermj/argo-multi-source-child
