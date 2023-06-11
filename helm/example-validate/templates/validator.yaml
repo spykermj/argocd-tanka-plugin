@@ -1,0 +1,2 @@
+---
+{{- include "example-validate.validate" . -}}
