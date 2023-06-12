@@ -23,7 +23,7 @@ spec:
       ref: values
     - path: helm/argo-child
       repoURL: https://github.com/spykermj/argo-multi-source-child
-      targetRevision: {{ .Values.deploy.gitRef }}
+      targetRevision: {{ .Values.childRef }}
       helm:
         parameters:
           - name: 'deploy.gitRef'
