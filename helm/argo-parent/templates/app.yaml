@@ -19,6 +19,9 @@ spec:
         parameters:
           - name: 'deploy.gitRef'
             value: {{ .Values.deploy.gitRef }}
+          - name: foo
+            value: |
+              $values
     - path: helm/example-validate
       repoURL: https://github.com/spykermj/argocd-tanka-plugin
       targetRevision: HEAD
