@@ -12,6 +12,13 @@ spec:
     namespace: child
   project: default
   sources:
+    - path: helm/argo-child
+      repoURL: https://github.com/spykermj/argo-multi-source-child
+      targetRevision: {{ .Values.childRef }}
+      helm:
+        parameters:
+          - name: 'deploy.gitRef'
+            value: {{ .Values.deploy.gitRef }}
     - path: helm/example-validate
       repoURL: https://github.com/spykermj/argocd-tanka-plugin
       targetRevision: HEAD
@@ -21,13 +28,6 @@ spec:
     - repoURL: https://github.com/spykermj/argo-multi-source-child
       targetRevision: {{ .Values.deploy.gitRef }}
       ref: values
-    - path: helm/argo-child
-      repoURL: https://github.com/spykermj/argo-multi-source-child
-      targetRevision: {{ .Values.childRef }}
-      helm:
-        parameters:
-          - name: 'deploy.gitRef'
-            value: {{ .Values.deploy.gitRef }}
   syncPolicy:
     automated:
       prune: true
